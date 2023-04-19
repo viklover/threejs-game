@@ -9,10 +9,10 @@ export default class Sizes extends EventEmitter {
 
   constructor() {
     super();
-    
-    this.update();
 
-    window.addEventListener("resize", this.update);
+    window.addEventListener("resize", () => {
+      this.update();
+    });
   }
 
   update() {
@@ -20,5 +20,7 @@ export default class Sizes extends EventEmitter {
     this.height = window.innerHeight;
 
     this.pixelRatio = Math.min(window.devicePixelRatio, 2);
+
+    this.trigger("resize");
   }
 }

@@ -10,16 +10,15 @@ export default abstract class EventEmitter {
   }
 
   public off(name: string): void {
-    delete this.callbacks[name]
+    delete this.callbacks[name];
   }
 
-  public trigger(name: string, args: any[]): void {
+  public trigger(name: string, args: any[] = []): void {
 
     if (name in this.callbacks) {
       this.callbacks[name](args);
     } else {
       throw new Error(`calls a not existing trigger by '${name}' name`);
     }
-
   }
 }

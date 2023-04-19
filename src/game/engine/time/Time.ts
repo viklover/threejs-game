@@ -1,5 +1,5 @@
 import EventEmitter from '../EventEmmiter';
-import Delta from './Delta'
+import Delta from './Delta';
 
 export default class Time extends EventEmitter {
 
@@ -10,12 +10,19 @@ export default class Time extends EventEmitter {
 
     this.delta = new Delta();
 
-    window.requestAnimationFrame(this.tick);
+    window.requestAnimationFrame(() => {
+      this.tick()
+    });
   }
 
-  tick() {
+  public tick() {
+
+    this.trigger('tick');
+
     this.delta.update();
 
-    window.requestAnimationFrame(this.tick);
+    window.requestAnimationFrame(() => {
+      this.tick()
+    });
   }
 }
